@@ -9,7 +9,8 @@ class InventoryExtractorRequest(InventoryExtractor):
     def getInventory(self, profile):
         
         inventoryExtractorRequestConfig = InventoryExtractorRequestConfig.make_from_env()
-        if(inventoryExtractorRequestConfig.validate):
+        inventoryExtractorRequestConfig.validate()
+        if inventoryExtractorRequestConfig.isValid():
             key = inventoryExtractorRequestConfig.apikey            
             r = requests.get(f"https://steamcommunity.com/id/{profile}/inventory/json/730/2")
             return json.loads(r.content)["rgDescriptions"]
