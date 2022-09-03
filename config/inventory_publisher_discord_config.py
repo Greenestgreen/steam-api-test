@@ -10,4 +10,4 @@ class InventoryExtractorDiscordConfig():
         return InventoryExtractorDiscordConfig(os.environ.get("discordkey"),os.environ.get("channel"))
 
     def validate(self):
-        return True if self.apikey else False 
+        return True if None not in [self.apikey, self.channel_id] else False 

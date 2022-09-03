@@ -8,8 +8,11 @@ class InventoryPublisherDiscord(InventoryPublisher):
 
     def publish(self, inventory):
         inventoryExtractorDiscordConfig  = InventoryExtractorDiscordConfig.make_from_env()
-        message = self.buildMessage(inventory)
-        self.sendMessageDiscord(inventoryExtractorDiscordConfig.apikey, inventoryExtractorDiscordConfig.channel_id ,message)
+        if inventoryExtractorDiscordConfig.validate():
+            message = self.buildMessage(inventory)
+            self.sendMessageDiscord(inventoryExtractorDiscordConfig.apikey, inventoryExtractorDiscordConfig.channel_id ,message)
+        else:
+            raise Exception("No all variables are set")
 
     def sendMessageDiscord(self,apikey, channel, message):
         DiscordBot.sendMessage(apikey,channel, message)
@@ -26,15 +29,12 @@ class InventoryPublisherDiscord(InventoryPublisher):
         
         items_message = "\n".join(items)
 
-        
-
-
         message = f"""Hey this person has  {ammount} items:
         ```{items_message[0:2000]} ```"""
         
         if len(items) < ammount/2:
-            message  = message + "Apparently you only have cases and stickers"
-        print(message)
+            message  = message + "Apparently he/she only have cases and stickers"
+
         return message
 
 
