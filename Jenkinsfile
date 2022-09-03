@@ -1,6 +1,5 @@
 pipeline {
-    agent {
-        label 'python'
+    agent {        
         docker {
             image 'python:latest'
         }
