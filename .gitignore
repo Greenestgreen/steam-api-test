@@ -6,7 +6,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+test.py
 # C extensions
 *.so
 
@@ -165,11 +165,7 @@ cython_debug/
 
 ### VisualStudioCode ###
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/*.code-snippets
+
 
 # Local History for Visual Studio Code
 .history/
