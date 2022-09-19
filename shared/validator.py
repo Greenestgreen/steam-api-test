@@ -1,10 +1,9 @@
-from distutils.log import error
-
 
 class Validator():
 
     errors = []
-       
+
+
     def validate(self, events) -> str:
         pass
 

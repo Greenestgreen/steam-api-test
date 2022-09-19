@@ -6,10 +6,9 @@ import json
 
 class InventoryPublisherDiscord(InventoryPublisher):
 
-    def publish(self, inventory):
+    def publish(self, message):
         inventoryExtractorDiscordConfig  = InventoryExtractorDiscordConfig.make_from_env()
-        if inventoryExtractorDiscordConfig.validate():
-            message = self.buildMessage(inventory)
+        if inventoryExtractorDiscordConfig.validate():            
             self.sendMessageDiscord(inventoryExtractorDiscordConfig.apikey, inventoryExtractorDiscordConfig.channel_id ,message)
         else:
             raise Exception("No all variables are set")
@@ -17,25 +16,6 @@ class InventoryPublisherDiscord(InventoryPublisher):
     def sendMessageDiscord(self,apikey, channel, message):
         DiscordBot.sendMessage(apikey,channel, message)
 
-    def buildMessage(self,inventory):
-        items = []
-        ammount = len(inventory)
-        for k,v in inventory.items():
-            
-            item_name = inventory[k].get("name")
-
-            if "Case" not in item_name  and "Graffiti" not in item_name and "Sticker" not in item_name:
-                items.append(inventory[k].get("name"))
-        
-        items_message = "\n".join(items)
-
-        message = f"""Hey this person has  {ammount} items:
-        ```{items_message[0:2000]} ```"""
-        
-        if len(items) < ammount/2:
-            message  = message + "Apparently he/she only have cases and stickers"
-
-        return message
 
 
 

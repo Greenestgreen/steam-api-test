@@ -1,2 +1,8 @@
 discord.py
 pytest
+
+    ID de clave de acceso:
+    AKIAQH5UXCQKUE3BJW57
+    Clave de acceso secreta:
+    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
+
